@@ -34,8 +34,7 @@ router.beforeEach((to, from, next) => {
   // 下个页面不是登录页面
   if (to.path !== '/login') {
     // 有登录信息，可以跳转到下个路由，否则回到登录页面
-    if (store.state.user.email) {
-      // store.state.user.appkey && store.state.user.email && store.state.user.role
+    if (store.state.user.appkey && store.state.user.email && store.state.user.role) {
       next();
     } else {
       next({ name: 'Login' });

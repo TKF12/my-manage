@@ -12,7 +12,7 @@ export default new Vuex.Store({
       username: getCookie().username,
       appkey: getCookie().appkey,
       email: getCookie().email,
-      role: getCookie().reol,
+      role: getCookie().role,
     },
   },
   mutations: {

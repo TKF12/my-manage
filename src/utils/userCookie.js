@@ -21,7 +21,7 @@ export function getCookie() {
     username: Cookies.get('username'),
     appkey: Cookies.get('appkey'),
     email: Cookies.get('email'),
-    reol: Cookies.get('reol'),
+    role: Cookies.get('role'),
   };
 }
 // 删除cookie
@@ -29,5 +29,5 @@ export function deteCookie() {
   Cookies.remove('username');
   Cookies.remove('appkey');
   Cookies.remove('email');
-  Cookies.remove('reol');
+  Cookies.remove('role');
 }
