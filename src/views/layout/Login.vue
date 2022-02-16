@@ -88,7 +88,6 @@ export default {
         if (valid) {
           api.login(this.loginForm)
             .then((res) => {
-              console.log(res);
               this.$store.dispatch('setUser', res);
               // 页面跳转
               this.$router.push({
