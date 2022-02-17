@@ -5,7 +5,8 @@
             class="main-app"
             :class="{ 'menu-unfold': $store.state.collapsed }"
         >
-            <Header />
+        <Header />
+        <router-view></router-view>
         </div>
     </div>
 </template>

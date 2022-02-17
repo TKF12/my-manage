@@ -14,6 +14,7 @@ export default new Vuex.Store({
       email: getCookie().email,
       role: getCookie().role,
     },
+    routes: [],
   },
   mutations: {
     // 修改当前是否显示
@@ -33,6 +34,10 @@ export default new Vuex.Store({
         role: '',
       };
     },
+    // 保存路由
+    changeRoutes(state, payload) {
+      state.routes = payload;
+    },
   },
   actions: {
     reviseCollapsed({ commit }) {
@@ -47,6 +52,11 @@ export default new Vuex.Store({
       commit('deteUser');
       // 删除cookie
       deteCookie();
+    },
+    changeRoutes({ commit }, payload) {
+      // 登录路由不保存
+      const arr = payload.filter((r) => r.meta);
+      commit('changeRoutes', arr);
     },
   },
   modules: {

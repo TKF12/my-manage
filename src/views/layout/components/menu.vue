@@ -1,44 +1,36 @@
 <template>
     <div class="menu-list">
         <a-menu
-            :default-selected-keys="['1']"
-            :default-open-keys="['sub1']"
+            :default-selected-keys="[$router.currentRoute.name === 'Home' ?
+                                    'Index':$router.currentRoute.name]"
+            :default-open-keys="[$router.currentRoute.matched[0].name]"
             mode="inline"
             theme="dark"
             :inline-collapsed="$store.state.collapsed"
         >
-            <a-menu-item key="1">
-                <a-icon type="pie-chart" />
-                <span>Option 1</span>
-            </a-menu-item>
-            <a-menu-item key="2">
-                <a-icon type="desktop" />
-                <span>Option 2</span>
-            </a-menu-item>
-            <a-menu-item key="3">
-                <a-icon type="inbox" />
-                <span>Option 3</span>
-            </a-menu-item>
-            <a-sub-menu key="sub1">
+            <a-sub-menu v-for="n in $store.state.routes" :key="n.name">
                 <span slot="title"
-                    ><a-icon type="mail" /><span>Navigation One</span></span
+                    ><a-icon :type="n.meta.icon" /><span></span>{{ n.meta.title }}</span
                 >
-                <a-menu-item key="5"> Option 5 </a-menu-item>
-                <a-menu-item key="6"> Option 6 </a-menu-item>
-                <a-menu-item key="7"> Option 7 </a-menu-item>
-                <a-menu-item key="8"> Option 8 </a-menu-item>
-            </a-sub-menu>
-            <a-sub-menu key="sub2">
-                <span slot="title"
-                    ><a-icon type="appstore" /><span>Navigation Two</span></span
-                >
-                <a-menu-item key="9"> Option 9 </a-menu-item>
-                <a-menu-item key="10"> Option 10 </a-menu-item>
-                <a-sub-menu key="sub3" title="Submenu">
-                    <a-menu-item key="11"> Option 11 </a-menu-item>
-                    <a-menu-item key="12"> Option 12 </a-menu-item>
-                </a-sub-menu>
+                <a-menu-item v-for="sta in n.children" :key="sta.name">
+                    <router-link :to="{name: sta.name}">
+                        <a-icon :type="sta.meta.icon" />
+                        {{ sta.meta.title }}
+                    </router-link>
+                </a-menu-item>
             </a-sub-menu>
         </a-menu>
     </div>
 </template>
+<script>
+export default {
+  created() {
+    console.log(this.$route);
+    console.log(this.$router);
+  },
+  updated() {
+    console.log(this.$route);
+    console.log(this.$router);
+  },
+};
+</script>
