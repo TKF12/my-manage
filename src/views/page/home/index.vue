@@ -1,10 +1,19 @@
 <template>
-  <h1>统计</h1>
+  <div class="Index">
+    <Card />
+    <Chart />
+  </div>
 </template>
 
 <script>
-export default {
+import Card from '@/components/Card.vue';
+import Chart from '@/components/Chart.vue';
 
+export default {
+  components: {
+    Card,
+    Chart,
+  },
 };
 </script>
 

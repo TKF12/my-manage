@@ -56,6 +56,8 @@ const routes = [
       title: '首页',
       icon: 'home',
     },
+    // 重定向，当访问的路径是/时，访问的是统计页面
+    redirect: '/index',
     children: [{
       path: '/index',
       name: 'Index',
