@@ -9,9 +9,10 @@
             :inline-collapsed="$store.state.collapsed"
         >
             <a-sub-menu v-for="n in $store.state.routes" :key="n.name">
-                <span slot="title"
-                    ><a-icon :type="n.meta.icon" /><span></span>{{ n.meta.title }}</span
-                >
+                <span slot="title">
+                    <a-icon :type="n.meta.icon" />
+                    <span>{{ n.meta.title }}</span>
+                </span>
                 <a-menu-item v-for="sta in n.children" :key="sta.name">
                     <router-link :to="{name: sta.name}">
                         <a-icon :type="sta.meta.icon" />

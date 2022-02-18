@@ -75,6 +75,7 @@ const routes = [
 const router = new VueRouter({
   routes,
 });
+// 过滤后的路由是否已经添加过了
 let lock = false;
 router.beforeEach((to, from, next) => {
   // console.log(to, from);
@@ -90,12 +91,12 @@ router.beforeEach((to, from, next) => {
         store.dispatch('changeRoutes', routes.concat(menuRouter)).then(() => {
           // 添加路由
           router.addRoutes(menuRouter);
-          next();
+          return next();
         });
         lock = true;
       }
     } else {
-      next({ name: 'Login' });
+      return next({ name: 'Login' });
     }
   }
   return next();
