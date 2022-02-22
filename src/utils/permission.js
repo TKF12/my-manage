@@ -36,7 +36,7 @@ export default function getRouter(role, routes) {
     // 保存当前路由
     const obj = r;
     // 对应权限是否有这个路由
-    if (allRouteNames.indexOf(r.name) !== -1 && r.meta) {
+    if (allRouteNames.indexOf(r.name) !== -1) {
       // 子路由对应权限的路由
       obj.children = obj.children.filter((c) => allRouteNames.indexOf(c.name) !== -1);
       return true;

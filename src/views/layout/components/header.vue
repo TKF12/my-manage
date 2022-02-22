@@ -35,7 +35,7 @@ export default {
     };
   },
   watch: {
-    // 路由发生变化时，更新当前路由
+    // 路由发生变化时，获取最新路由信息
     $route() {
       this.currentRoute = this.$router.currentRoute;
     },

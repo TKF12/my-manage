@@ -8,12 +8,14 @@ export default new Vuex.Store({
   state: {
     // 菜单栏是否闭合，true是闭合，false是不闭合
     collapsed: false,
+    // 用户数据
     user: {
       username: getCookie().username,
       appkey: getCookie().appkey,
       email: getCookie().email,
       role: getCookie().role,
     },
+    // 路由数据
     routes: [],
   },
   mutations: {
