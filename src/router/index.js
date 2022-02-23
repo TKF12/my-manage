@@ -81,6 +81,7 @@ const routes = [
       meta: {
         title: '统计',
         icon: 'area-chart',
+        show: true,
       },
     }],
   },
