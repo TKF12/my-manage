@@ -4,6 +4,8 @@ import store from '@/store';
 import getRouter from '@/utils/permission';
 import Home from '../views/layout/Home.vue';
 import Login from '../views/layout/Login.vue';
+import Index from '../views/page/home/index.vue';
+// () => import('@/views/page/home/index.vue'),
 
 Vue.use(VueRouter);
 
@@ -15,6 +17,7 @@ const menuRoutes = [
     meta: {
       title: '商品',
       icon: 'shopping-cart',
+      show: true,
     },
     children: [
       {
@@ -24,6 +27,7 @@ const menuRoutes = [
         meta: {
           title: '商品列表',
           icon: 'unordered-list',
+          show: true,
         },
       },
       {
@@ -33,6 +37,17 @@ const menuRoutes = [
         meta: {
           title: '添加商品',
           icon: 'medicine-box',
+          show: true,
+        },
+      },
+      {
+        path: 'editItem/:Id',
+        name: 'EditItem',
+        component: () => import('@/views/page/commodity/AddGoods.vue'),
+        meta: {
+          title: '编辑商品',
+          icon: 'medicine-box',
+          show: false,
         },
       },
       {
@@ -55,13 +70,14 @@ const routes = [
     meta: {
       title: '首页',
       icon: 'home',
+      show: true,
     },
     // 重定向，当访问的路径是/时，访问的是统计页面
     redirect: '/index',
     children: [{
       path: '/index',
       name: 'Index',
-      component: () => import('@/views/page/home/index.vue'),
+      component: Index,
       meta: {
         title: '统计',
         icon: 'area-chart',
@@ -72,6 +88,9 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login,
+    meta: {
+      show: false,
+    },
   },
 ];
 const router = new VueRouter({
@@ -93,13 +112,13 @@ router.beforeEach((to, from, next) => {
         store.dispatch('changeRoutes', routes.concat(menuRouter)).then(() => {
           // 添加路由
           router.addRoutes(menuRouter);
-          return next();
+          next();
         });
         lock = true;
       }
-    } else {
-      return next({ name: 'Login' });
+      return next();
     }
+    return next({ name: 'Login' });
   }
   return next();
 });

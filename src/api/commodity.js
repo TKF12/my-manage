@@ -9,4 +9,8 @@ export default {
   respTable(params) {
     return requset.get('/products/all', { params });
   },
+  // 删除商品
+  deleteItem(params) {
+    return requset.delete(`/products/${params}`);
+  },
 };

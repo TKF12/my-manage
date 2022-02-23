@@ -1,7 +1,12 @@
 <template>
     <div>
         <Search @submit="changeSearch" :list="categoryList" />
-        <Table :data="tableData" :page="page" @changePage="setPage" />
+        <Table
+        :data="tableData"
+        :page="page"
+        @changePage="setPage"
+        @edit="editItem"
+        @remove="removeItem" />
     </div>
 </template>
 
@@ -67,7 +72,6 @@ export default {
         size: this.page.pageSize,
         ...this.searchData,
       }).then((data) => {
-        console.log(data);
         // 更新商品列表数据
         this.tableData = data.data.map((rep) => ({
           ...rep,
@@ -86,6 +90,25 @@ export default {
       this.page.pageSize = page.pageSize;
       // 获取获取商品列表数据
       this.getTable();
+    },
+    // 编辑商品
+    editItem(record) {
+      console.log(record);
+      this.$router.push({
+        name: 'EditItem',
+        params: {
+          Id: record.id,
+        },
+      });
+    },
+    // 删除商品
+    removeItem(record) {
+      // console.log(record);
+      api.deleteItem(record.id).then((rep) => {
+        console.log(rep);
+        // 获取最新数据
+        this.getTable();
+      });
     },
   },
 };

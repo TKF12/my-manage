@@ -6,9 +6,17 @@
         @change="changePage"
         :rowKey="data => data.id"
         >
-        <div slot="operation">
-        <a-button>编辑</a-button>
-        <a-button>删除</a-button>
+        <div slot="operation" slot-scope="text,record">
+          <a-button style="margin-right: 3px" @click="edit(record)">编辑</a-button>
+          <a-popconfirm
+            :title="'是否删除商品名为 “'+record.title+'” 的商品'"
+            ok-text="是"
+            cancel-text="否"
+            @confirm="remove(record)">
+            <a-button type="danger">
+              删除
+            </a-button>
+          </a-popconfirm>
         </div>
     </a-table>
 </template>
@@ -66,7 +74,10 @@ const columns = [
     title: '操作',
     dataIndex: 'operation',
     // key: 'operation',
+    // 绑定插槽
     scopedSlots: { customRender: 'operation' },
+    width: 180,
+    align: 'center',
   },
 ];
 
@@ -81,6 +92,14 @@ export default {
     // 页码改变
     changePage(page) {
       this.$emit('changePage', page);
+    },
+    // 编辑商品
+    edit(record) {
+      this.$emit('edit', record);
+    },
+    // 删除
+    remove(record) {
+      this.$emit('remove', record);
     },
   },
 };

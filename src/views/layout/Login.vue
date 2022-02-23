@@ -99,17 +99,14 @@ export default {
               // 错误信息弹窗
               this.$message.error(err);
             });
-        } else {
-          //   console.log('error submit!!');
-          return false;
+          return true;
         }
-        return true;
+        return false;
       });
     },
-    resetForm(formName) {
-      console.log(this.$refs[formName]);
-      this.$refs[formName].resetFields();
-    },
+    // resetForm(formName) {
+    //   this.$refs[formName].resetFields();
+    // },
   },
 };
 </script>

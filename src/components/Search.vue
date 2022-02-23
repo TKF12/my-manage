@@ -28,6 +28,11 @@
                 <a-button type="primary" html-type="submit"> 搜索 </a-button>
             </a-form-item>
         </a-form>
+        <div class="add-commodity">
+          <a-button type="primary" icon="medicine-box" size="large">
+            添加商品
+          </a-button>
+        </div>
     </div>
 </template>
 
@@ -69,5 +74,16 @@ export default {
 <style lang="less">
 .Search {
     padding: 10px 30px;
+    form{
+      float: left;
+    }
+    .add-commodity{
+      float: right;
+    }
+    &::after{
+      content: "";
+      display: block;
+      clear: both;
+    }
 }
 </style>

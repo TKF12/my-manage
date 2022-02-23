@@ -56,9 +56,10 @@ export default new Vuex.Store({
       deteCookie();
     },
     changeRoutes({ commit }, payload) {
+      // console.log(payload);
       // 登录路由不保存
-      const arr = payload.filter((r) => r.meta);
-      commit('changeRoutes', arr);
+      // const arr = payload.filter((r) => r.meta);
+      commit('changeRoutes', payload);
     },
   },
   modules: {

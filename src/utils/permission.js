@@ -10,6 +10,9 @@ const permission = {
     {
       name: 'AddGoods',
     },
+    {
+      name: 'EditItem',
+    },
   ],
   admin: [
     {
@@ -24,13 +27,15 @@ const permission = {
     {
       name: 'Category',
     },
+    {
+      name: 'EditItem',
+    },
   ],
 };
 // 过滤可以访问的路由
 export default function getRouter(role, routes) {
   // 对应权限的所有路由名称
   const allRouteNames = permission[role].map((e) => e.name);
-  console.log(allRouteNames, routes);
   // 路由
   const accessRoutes = routes.filter((r) => {
     // 保存当前路由
