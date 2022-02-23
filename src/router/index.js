@@ -4,6 +4,7 @@ import store from '@/store';
 import getRouter from '@/utils/permission';
 import Home from '../views/layout/Home.vue';
 import Login from '../views/layout/Login.vue';
+import Index from '../views/page/home/index.vue';
 
 Vue.use(VueRouter);
 
@@ -61,7 +62,7 @@ const routes = [
     children: [{
       path: '/index',
       name: 'Index',
-      component: () => import('@/views/page/home/index.vue'),
+      component: Index,
       meta: {
         title: '统计',
         icon: 'area-chart',
