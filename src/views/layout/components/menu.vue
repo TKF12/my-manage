@@ -1,10 +1,9 @@
 <template>
-    <div class="menu-list">
+    <div class="menu-list" :key="timestamp">
         <a-menu
             :default-selected-keys="[
                 $router.currentRoute.name === 'Home'
-                    ? 'Index'
-                    : $router.currentRoute.name,
+                ? 'Index' : $router.currentRoute.name
             ]"
             :default-open-keys="[$router.currentRoute.matched[0].name]"
             mode="inline"
@@ -32,8 +31,17 @@
 </template>
 <script>
 export default {
-  created() {
-    // console.log(this.$store.state.routes);
+  data() {
+    return {
+
+      timestamp: new Date().getTime(),
+    };
+  },
+  watch: {
+    // 路由改变时，改变key vue会重新渲染，选择器就重新选择
+    $route() {
+      this.timestamp = new Date().getTime();
+    },
   },
 };
 </script>

@@ -1,6 +1,11 @@
 <template>
     <div class="Search">
-        <a-form layout="inline" @submit.native.prevent :form="formSearch" @submit="submitSearch">
+        <a-form
+            layout="inline"
+            @submit.native.prevent
+            :form="formSearch"
+            @submit="submitSearch"
+        >
             <a-form-item label="搜索关键字">
                 <a-input
                     v-model="formSearch.searchWord"
@@ -15,12 +20,14 @@
                     style="width: 200px"
                     @change="handleChange"
                     :allowClear="true"
+                    :filter-option="filterOption"
                 >
                     <a-select-option
                         v-for="n in list"
                         :key="n.id"
-                        :value="n.id">
-                    {{n.name}}
+                        :value="n.id"
+                    >
+                        {{ n.name }}
                     </a-select-option>
                 </a-select>
             </a-form-item>
@@ -29,9 +36,11 @@
             </a-form-item>
         </a-form>
         <div class="add-commodity">
-          <a-button type="primary" icon="medicine-box" size="large">
-            添加商品
-          </a-button>
+            <router-link :to="{ name: 'AddGoods' }">
+              <a-button type="primary" icon="medicine-box" size="large">
+                添加商品
+              </a-button>
+            </router-link>
         </div>
     </div>
 </template>
@@ -68,22 +77,27 @@ export default {
       // 保存当前选中的类别id
       this.formSearch.category = val;
     },
+    // 类别选项搜索
+    filterOption(input, option) {
+      return option.componentOptions.children[0].text
+        .toLowerCase().indexOf(input.toLowerCase()) >= 0;
+    },
   },
 };
 </script>
 <style lang="less">
 .Search {
     padding: 10px 30px;
-    form{
-      float: left;
+    form {
+        float: left;
     }
-    .add-commodity{
-      float: right;
+    .add-commodity {
+        float: right;
     }
-    &::after{
-      content: "";
-      display: block;
-      clear: both;
+    &::after {
+        content: "";
+        display: block;
+        clear: both;
     }
 }
 </style>
