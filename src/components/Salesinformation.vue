@@ -65,19 +65,17 @@ export default {
       other: '',
       // 校验规则
       rules: {
-        price: [
-          {
-            required: true,
-            trigger: 'blur',
-            transform: (value) => {
-              if (!value.length) {
-                this.form.price = 0;
-              }
-              return Number(value);
-            },
-            validator: (rule, value, callback) => product(value, callback, '输入格式不正确，请输入数字', '价格不能小于0'),
+        price: [{
+          required: true,
+          trigger: 'blur',
+          transform: (value) => {
+            if (!value.length) {
+              this.form.price = 0;
+            }
+            return Number(value);
           },
-        ],
+          validator: (rule, value, callback) => product(value, callback, '输入格式不正确，请输入数字', '价格不能小于0'),
+        }],
         price_off: [{
           required: false,
           trigger: 'blur',
@@ -104,6 +102,18 @@ export default {
       // 图片预览列表
       fileList: [],
     };
+  },
+  created() {
+    const { Id } = this.$route.params;
+    // 编辑页面
+    if (Id) {
+      this.fileList = this.form.images.map((item, i) => ({
+        uid: i,
+        name: `image${i}.png`,
+        status: 'done',
+        url: item,
+      }));
+    }
   },
   methods: {
     handleCancel() {

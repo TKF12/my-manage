@@ -17,4 +17,12 @@ export default {
   addItem(params) {
     return requset.post('/products/add', params);
   },
+  // 查询商品信息
+  queryProduct(params) {
+    return requset.get(`/products/${params}`);
+  },
+  // 编辑商品提交
+  editProduct(params) {
+    return requset.put('/products/edit', params);
+  },
 };

@@ -1,14 +1,15 @@
 <template>
-    <div class="menu-list" :key="timestamp">
+    <div class="menu-list">
         <a-menu
             :default-selected-keys="[
-                $router.currentRoute.name === 'Home'
+            $router.currentRoute.name === 'Home'
                 ? 'Index' : $router.currentRoute.name
             ]"
             :default-open-keys="[$router.currentRoute.matched[0].name]"
             mode="inline"
             theme="dark"
             :inline-collapsed="$store.state.collapsed"
+            :selectedKeys="currChecked"
         >
             <template v-for="n in $store.state.routes">
                 <a-sub-menu v-if="n.meta.show" :key="n.name">
@@ -33,14 +34,19 @@
 export default {
   data() {
     return {
-
-      timestamp: new Date().getTime(),
+      // 当前选中
+      currChecked: [this.$router.currentRoute.name === 'Home'
+        ? 'Index' : this.$router.currentRoute.name],
     };
   },
   watch: {
-    // 路由改变时，改变key vue会重新渲染，选择器就重新选择
+    // 路由改变时，编辑页面选中取消
     $route() {
-      this.timestamp = new Date().getTime();
+      if (this.$route.name === 'EditItem') {
+        this.currChecked = ['EditItem'];
+      }
+      this.currChecked = [this.$router.currentRoute.name === 'Home'
+        ? 'Index' : this.$router.currentRoute.name];
     },
   },
 };

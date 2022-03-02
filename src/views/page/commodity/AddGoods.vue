@@ -52,7 +52,7 @@ export default {
         title: '',
         desc: '',
         category: [],
-        c_items: [],
+        c_item: [],
         tags: ['包邮'],
         // 商品价格
         price: 0,
@@ -76,6 +76,15 @@ export default {
       ],
     };
   },
+  created() {
+    const { Id } = this.$route.params;
+    // 是编辑页
+    if (Id) {
+      api.queryProduct(Id).then((rep) => {
+        this.form = rep;
+      });
+    }
+  },
   methods: {
     // 下一步
     next() {
@@ -97,10 +106,19 @@ export default {
     },
     // 提交
     addProduct() {
-      api.addItem(this.form).then(() => {
-        this.$message.success('添加商品成功');
-        this.$router.push({ name: 'ProductList' });
-      });
+      const { Id } = this.$route.params;
+      // 编辑页
+      if (Id) {
+        api.editProduct(this.form).then(() => {
+          this.$message.success('商品修改成功');
+          this.$router.push({ name: 'ProductList' });
+        });
+      } else {
+        api.addItem(this.form).then(() => {
+          this.$message.success('添加商品成功');
+          this.$router.push({ name: 'ProductList' });
+        });
+      }
     },
   },
 };

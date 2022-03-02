@@ -63,7 +63,6 @@ export default {
       this.searchData = data;
       // 获取最新数据
       this.getTable();
-      console.log(this.searchData);
     },
     // 获取商品列表数据
     getTable() {
@@ -93,7 +92,6 @@ export default {
     },
     // 编辑商品
     editItem(record) {
-      console.log(record);
       this.$router.push({
         name: 'EditItem',
         params: {
@@ -104,8 +102,7 @@ export default {
     // 删除商品
     removeItem(record) {
       // console.log(record);
-      api.deleteItem(record.id).then((rep) => {
-        console.log(rep);
+      api.deleteItem(record.id).then(() => {
         // 获取最新数据
         this.getTable();
       });

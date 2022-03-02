@@ -27,7 +27,7 @@
                     placeholder="选择子类目"
                     :allowClear="true"
                     :filter-option="filterOption"
-                    v-model="form.c_items"
+                    v-model="form.c_item"
                 >
                     <a-select-option
                         v-for="n in items"
