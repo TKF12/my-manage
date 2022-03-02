@@ -13,4 +13,8 @@ export default {
   deleteItem(params) {
     return requset.delete(`/products/${params}`);
   },
+  // 添加商品
+  addItem(params) {
+    return requset.post('/products/add', params);
+  },
 };
