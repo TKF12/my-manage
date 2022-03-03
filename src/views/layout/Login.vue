@@ -1,5 +1,6 @@
 <template>
-    <div class="login">
+    <div class="Login">
+      <h1 class="title">登录</h1>
         <a-form-model
             ref="loginForm"
             :model="loginForm"
@@ -22,7 +23,7 @@
             >
                 <a-input v-model="loginForm.password" type="password" />
             </a-form-model-item>
-            <a-form-model-item :wrapper-col="{ span: 14, offset: 4 }">
+            <a-form-model-item :wrapper-col="{ span: 14, offset: 5 }">
                 <a-button type="primary" @click="submitForm('loginForm')">
                     登录
                 </a-button>
@@ -32,33 +33,22 @@
                 >
                     重置
                 </a-button>
+                <router-link :to="{name: 'Register'}">
+                  <a-button type="primary" class="btnRight">
+                    注册<a-icon type="right" />
+                  </a-button>
+                </router-link>
             </a-form-model-item>
         </a-form-model>
     </div>
 </template>
 <script>
 import api from '@/api/user';
+import verify from '@/utils/verify';
 
 export default {
   data() {
-    let checkPending;
-    const emailVerify = /^[\S]+@[\S]+.com$/;
-    const checkEmail = (rule, value, callback) => {
-      clearTimeout(checkPending);
-      if (!value) {
-        callback(new Error('请输入邮箱'));
-      }
-      checkPending = setTimeout(() => {
-        // 邮箱正确
-        if (emailVerify.test(value)) {
-          callback();
-        } else {
-          callback(new Error('邮箱格式不正确'));
-        }
-        // return undefined;
-      }, 1000);
-      //   return undefined;
-    };
+    const checkEmail = verify.email();
     const validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入密码'));
@@ -76,7 +66,7 @@ export default {
         email: [{ validator: checkEmail, trigger: 'change' }],
       },
       layout: {
-        labelCol: { span: 4 },
+        labelCol: { span: 5 },
         wrapperCol: { span: 14 },
       },
     };
@@ -104,12 +94,28 @@ export default {
         return false;
       });
     },
-    // resetForm(formName) {
-    //   this.$refs[formName].resetFields();
-    // },
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
+    },
   },
 };
 </script>
 <style lang="less">
-@import "~@/assets/css/login.less";
+.Login{
+  padding: 30px 0 0 20px;
+  min-width: 500px;
+  max-width: 500px;
+  min-height: 300px;
+  margin: 100px auto 0;
+  border: 1px solid #dadce0;
+  .title{
+    color: #202124;
+    margin-left: 100px;
+    margin-bottom: 30px;
+  }
+  .btnRight{
+  margin-left: 55px;
+}
+}
+
 </style>

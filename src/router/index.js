@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import store from '@/store';
 import getRouter from '@/utils/permission';
 import Home from '../views/layout/Home.vue';
+import Register from '../views/layout/Register.vue';
 import Login from '../views/layout/Login.vue';
 import Index from '../views/page/home/index.vue';
 // () => import('@/views/page/home/index.vue'),
@@ -93,16 +94,24 @@ const routes = [
       show: false,
     },
   },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
+    meta: {
+      show: false,
+    },
+  },
 ];
 const router = new VueRouter({
   routes,
 });
 // 过滤后的路由是否已经添加过了
 let lock = false;
-router.beforeEach((to, from, next) => {
+router.beforeResolve((to, from, next) => {
   // console.log(to, from);
   // 下个页面不是登录页面
-  if (to.path !== '/login') {
+  if (to.path !== '/login' && to.path !== '/register') {
     // 有登录信息，可以跳转到下个路由，否则回到登录页面
     if (store.state.user.appkey && store.state.user.email && store.state.user.role) {
       // 防止访问一个路由，就往路由里面添加过滤后的路由
@@ -119,7 +128,7 @@ router.beforeEach((to, from, next) => {
       }
       return next();
     }
-    return next({ name: 'Login' });
+    return false;
   }
   return next();
 });
