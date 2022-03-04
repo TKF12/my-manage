@@ -52,11 +52,13 @@ const menuRoutes = [
         },
       },
       {
-        path: 'category',
+        path: '/category',
         name: 'Category',
         component: () => import('@/views/page/commodity/Category.vue'),
         meta: {
-          title: '类目管理',
+          title: '商品类目管理',
+          show: true,
+          icon: 'edit',
         },
       },
     ],

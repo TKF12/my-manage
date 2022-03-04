@@ -13,6 +13,7 @@ instance.interceptors.request.use((config) => {
   return {
     ...config,
     params: {
+      // appkey: 'aaaaaa_1595418182431',
       appkey: store.state.user.appkey,
       // 参数
       ...config.params,

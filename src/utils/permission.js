@@ -13,6 +13,9 @@ const permission = {
     {
       name: 'EditItem',
     },
+    {
+      name: 'Category',
+    },
   ],
   admin: [
     {

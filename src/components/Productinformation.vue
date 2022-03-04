@@ -63,7 +63,7 @@ export default {
     return {
       // 商品类目
       list: [],
-      // 子子类目
+      // 子类目
       items: [],
       labelCol: { span: 4 },
       wrapperCol: { span: 14 },

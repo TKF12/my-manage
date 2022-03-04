@@ -6,7 +6,8 @@
         :page="page"
         @changePage="setPage"
         @edit="editItem"
-        @remove="removeItem" />
+        @remove="removeItem"
+        :columns="columns" />
     </div>
 </template>
 
@@ -15,6 +16,65 @@ import Search from '@/components/Search.vue';
 import Table from '@/components/Table.vue';
 import api from '@/api/commodity';
 
+const columns = [
+  {
+    title: 'ID',
+    dataIndex: 'id',
+    // key: 'id',
+  },
+  {
+    title: '标题',
+    dataIndex: 'title',
+    // key: 'title',
+  },
+  {
+    title: '描述',
+    dataIndex: 'desc',
+    // key: 'desc',
+  },
+  {
+    title: '类目',
+    dataIndex: 'categoryName',
+    // key: 'category',
+  },
+  {
+    title: '预售价格',
+    dataIndex: 'price',
+    // key: 'price',
+  },
+  {
+    title: '折扣价格',
+    dataIndex: 'price_off',
+    // key: 'price_off',
+  },
+  {
+    title: '标签',
+    dataIndex: 'tags',
+    // key: 'tags',
+  },
+  {
+    title: '限制购买数量',
+    dataIndex: 'inventory',
+    // key: 'inventory',
+  },
+  {
+    title: '上架状态',
+    dataIndex: 'status',
+    // 当前行数据
+    customRender: (text, record) => (record.status === 0 ? '未上架' : '已上架'),
+    // key: 'status',
+  },
+  {
+    title: '操作',
+    dataIndex: 'operation',
+    // key: 'operation',
+    // 绑定插槽
+    scopedSlots: { customRender: 'operation' },
+    width: 180,
+    align: 'center',
+  },
+];
+
 export default {
   components: {
     Search,
@@ -22,6 +82,7 @@ export default {
   },
   data() {
     return {
+      columns,
       // 商品列表
       tableData: [],
       // 搜索内容
@@ -77,15 +138,15 @@ export default {
           // 商品类目名称
           categoryName: this.categoryObject[rep.category].name,
         }));
-        // 更新页码总数
+        // 更新总页数
         this.page.total = data.total;
       });
     },
     // 更新页码
     setPage(page) {
-      // 跟新当前页
+      // 更新当前页
       this.page.current = page.current;
-      // 跟新页容量
+      // 更新页容量
       this.page.pageSize = page.pageSize;
       // 获取获取商品列表数据
       this.getTable();
