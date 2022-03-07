@@ -128,7 +128,7 @@ router.beforeResolve((to, from, next) => {
       }
       return next();
     }
-    return false;
+    return next({ name: 'Login' });
   }
   return next();
 });
