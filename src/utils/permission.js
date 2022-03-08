@@ -13,9 +13,9 @@ const permission = {
     {
       name: 'EditItem',
     },
-    {
-      name: 'Category',
-    },
+    // {
+    //   name: 'Category',
+    // },
   ],
   admin: [
     {

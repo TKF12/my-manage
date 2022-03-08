@@ -18,7 +18,6 @@
         :model="model"
         :visible="visible"
         @showModal="showVisible"
-        @addSuccess="addSuccess"
         @condition="condition"/>
     </div>
 </template>

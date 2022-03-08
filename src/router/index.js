@@ -104,6 +104,14 @@ const routes = [
       show: false,
     },
   },
+  {
+    path: '/changeuser',
+    name: 'Changeuser',
+    component: () => import('@/components/Userinfo.vue'),
+    meta: {
+      show: false,
+    },
+  },
 ];
 const router = new VueRouter({
   routes,

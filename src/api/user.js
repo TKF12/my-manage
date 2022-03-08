@@ -9,7 +9,12 @@ export default {
   verify(params) {
     return requset.post('/passport/getCode', { email: params });
   },
+  // 注册
   register(params) {
     return requset.post('/passport/logon', params);
+  },
+  // 修改用户信息
+  changeUser(params) {
+    return requset.put('/passport/changeUserInfo', params);
   },
 };

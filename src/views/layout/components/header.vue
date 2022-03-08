@@ -22,6 +22,11 @@
                 欢迎，{{ $store.state.user.username }}
                 <a-icon type="down" />
             </li>
+            <li>
+            <router-link style="color: rgba(0, 0, 0, 0.65)" :to="{name: 'Changeuser'}">
+              修改用户信息
+            </router-link>
+            </li>
             <li @click="loginOut">退出登录</li>
         </ul>
     </div>
