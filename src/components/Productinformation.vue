@@ -81,6 +81,7 @@ export default {
         .toLowerCase().indexOf(input.toLowerCase()) >= 0;
     },
     changeItem(key) {
+      this.form.c_item = [];
       for (let i = 0; i < this.list.length; i += 1) {
         if (this.list[i].id === key) {
           // 更新子选项数据
@@ -88,7 +89,7 @@ export default {
         }
         // 子选项是否有数据 没有则空
         if (this.items.length < 1) {
-          this.form.c_items = [];
+          this.form.c_item = [];
         }
       }
     },
