@@ -135,10 +135,11 @@ export default {
       // 图片上传成功
       if (file.status === 'done') {
         // 添加提交的图片
-        this.form.images.push(file.response.data);
+        this.form.images.push(file.response.data.url);
       // 删除提交图片
       } else if (file.status === 'removed') {
-        this.form.images = this.form.images.filter((item) => item.url !== file.response.data.url);
+        console.log('删除');
+        this.form.images = this.form.images.filter((item) => item !== file.response.data.url);
       }
     },
   },
