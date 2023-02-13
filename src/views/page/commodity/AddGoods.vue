@@ -85,6 +85,15 @@ export default {
       });
     }
   },
+  watch: {
+    '$route.name': function (newVal) {
+      // 是添加页面 重置表单
+      // this.$options.data() 组件初始化数据
+      if (newVal === 'AddGoods') {
+        Object.assign(this.$data, this.$options.data());
+      }
+    },
+  },
   methods: {
     // 下一步
     next() {

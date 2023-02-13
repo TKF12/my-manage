@@ -5,8 +5,8 @@
             class="main-app"
             :class="{ 'menu-unfold': $store.state.collapsed }"
         >
-        <Header />
-        <router-view :key="new Date().getTime()"></router-view>
+            <Header />
+            <router-view></router-view>
         </div>
     </div>
 </template>

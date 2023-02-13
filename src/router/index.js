@@ -114,6 +114,7 @@ const routes = [
   },
 ];
 const router = new VueRouter({
+  mode: 'history',
   routes,
 });
 // 过滤后的路由是否已经添加过了
@@ -132,7 +133,7 @@ router.beforeResolve((to, from, next) => {
         store.dispatch('changeRoutes', routes.concat(menuRouter)).then(() => {
           // 添加路由
           router.addRoutes(menuRouter);
-          next();
+          return next();
         });
         lock = true;
       }
